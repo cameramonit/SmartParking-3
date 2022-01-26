@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "smartparkingsystem-5ffb7",
+  "private_key_id": "2f4717e68ead9c39fb44366a2d89a26410bab5ab",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC7Gmu/xmxi+KP6\nHGRJVLL+X0NokVNhBZapLN8e2nVq6Pdob/fESDNc4XEDyXzTmSzD+dofXJ3nX8Vy\nmnXdcHw3SAsoPg/cpXvgVknLipijADHqHh+imUe4QKqjzfWt7s9T7MXDqbRY1uwx\ny64Gs/kFsEV86YldQcQ+nXIuIU2dg/N6CQQJQ/GWrwb/Ou8S+MqDAET4d/yVhs3K\np/KNvy/k++v5MaUzS3CCzJe/zL09alXtgeXgGxs8I5CbkqKRzHAMoO8FLFxesFyG\nhe2oe2XjYUodI+C3Ciz9gawdAsb1U/UvP1RmBS213UjkaBGtdF+sA42aMUBSXoNr\nMnDzRTXbAgMBAAECggEAB0F7izjZLC9jQIhIVVWtCVNNbGkyWBFc6dudHXewVQCK\n06h/7cM1BrWRaemu5w/KHiF61XuEfhwHLq4RwxAhKQ2orRtXByH9v1HpU7TgvXV8\n+gzIAki6cMlFNMwAaonXzXPhqXhTz5wqFbZF3emtzwwqbbEqzAyIXTtC2cod1e1e\nksrskaazkHkgAGkWUSOH1WvF2VsSAJ8TJUeW30gWpiMBs/itM1itwmS16VdtDQBk\nl2nuRQOaMDaOGPbj5HWlLDuO/6PfXNcOULdvp5FDhuai+eVXDmYCNVhsIFmGZtxT\nOb9tOp11CbJkh6ebLiQKLpF12gc4ghL0HPwV/8bldQKBgQDa4JHWBUgW0OXS6hPr\nYtFLzAwHMpA8CabQoSvY8Jc4v/Ipu8YmO7R2OKefdFlyREKlT7DIpGaT2junLqwY\nD4v2GHW4/hNtP8EWbPvmlJC9ndNgP5DUTvc2P9PygL3NTYrGZug5JdWc4+S7lO9+\nbzmkaTswAzrYq893xNOAliJZvwKBgQDa1kFN42vkho9jXu05WnM+wd9QJJj/R9NS\nFyDtDgaUwtzzcp3K0B3Xexno0+cXJ/LmLD5vlXd3oxpLe2gXcTmdEdw3kalgq48d\nBpO15Ada8klHo9NRVK1rWSOUXTLRoKlk94QVdGT8iH8zzxReFZBEcQChVJNV16rg\nvvqQr6SS5QKBgADvZLAdZalzSwgTp/IhgfNo88Q0GxmmkOfjSGSs4niDmW1EOByB\ntMusgkrUHG24jPBX3tF8olOPYyHbuTCBIH/0qswXic21sAWAgbMCf3vP6M9Idj3x\n+Gxq6WTn1+fApQ8j8WoNF1SMRLXodP19TCm/qVkTKnUyhrhkRuMNwSfRAoGAdNAf\npdr60c6+JZYbXR0aHWrRsG8IuGP3un8cFU4CV1A5Lz6EWimDdG2CpBTQ6zxo3VLK\ntTd8wQDwXVBvfOv0jBJnkcYQOsj5KM5E9LfW8UYZtcMOXwCrXX0EkAK7yMhRA9NX\nzzgFXAPkmpw0TBCIpPAJHRUPXKg1z6hCCg+n8r0CgYAGJuewseSSsqgBVQ3AD7hc\njYsOqIqwJ75Wq6/h4Pq4RqGAGwMqO5wEnm+iPyKWFYFeKk5HjkKatFsc1BA8x5QZ\njFvfjWY4aM7GgEL1SLOx8ZMGyhXYIxmGUryXNNUfJzKJn8+wfP8QFdOqocUMfROf\nrEG5A/NFcaebx5ZAZxj5Aw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "smartparkingsystem-5ffb7@appspot.gserviceaccount.com",
+  "client_id": "110915394270532679193",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/smartparkingsystem-5ffb7%40appspot.gserviceaccount.com"
+}
