@@ -13,7 +13,7 @@ class cloud:
     LOCATION_COORDINATES = firestore.firestore.GeoPoint(12, 12)
 
     def __init__(self, CREDENTIALS_FILE_NAME, FIRST_SLOT_NO, LAST_SLOT_NO, LOCATION_COORDINATES):
-        self.PATH_TO_CREDENTIALS = os.getcwd() + CREDENTIALS_FILE_NAME
+        self.PATH_TO_CREDENTIALS = CREDENTIALS_FILE_NAME
         self.FIRST_SLOT_NO = FIRST_SLOT_NO
         self.LAST_SLOT_NO = LAST_SLOT_NO
         self.LOCATION_COORDINATES = LOCATION_COORDINATES
@@ -54,7 +54,7 @@ class cloud:
 
     def setSlotStatus(self, SLOT_NO, SLOT_STATUS):
         slot = self.firestore_db.collection('car').document(str(SLOT_NO))
-        slot.set({
+        slot.update({
             'ASSIGNED': True,
             'EMPTY': SLOT_STATUS
         })
