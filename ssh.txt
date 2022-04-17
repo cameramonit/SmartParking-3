@@ -1,3 +1,0 @@
-SSH key to access repo
-pi 2-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
-pi 1-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
