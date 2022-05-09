@@ -4,10 +4,9 @@ import os
 from cloudconnect import cloud
 from ultrasonic import Ultrasonic
 from led import Led
-from camera import Camera
-from licenseplate import LicensePlate
 from buzzer import Buzzer
 
+#Parking Node is the node at the parking slot
 
 
 LED_PIN1 = 1
