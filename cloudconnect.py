@@ -14,15 +14,18 @@ class Cloud:
     LOCATION_COORDINATES = firestore.firestore.GeoPoint(12, 12)
 
 
-    def __init__(self, CREDENTIALS_FILE_NAME, FIRST_SLOT_NO, LAST_SLOT_NO, AREA_COORDINATES):
+    def __init__(self, CREDENTIALS_FILE_NAME, AREA_COORDINATES):
         self.PATH_TO_CREDENTIALS = os.getcwd() +'/'+ CREDENTIALS_FILE_NAME
-        self.FIRST_SLOT_NO = FIRST_SLOT_NO
-        self.LAST_SLOT_NO = LAST_SLOT_NO
         self.AREA_COORDINATES = firestore.firestore.GeoPoint(AREA_COORDINATES[0],AREA_COORDINATES[1])
         cred = credentials.Certificate(self.PATH_TO_CREDENTIALS)
         firebase_admin.initialize_app(cred)
         self.firestore_db = firestore.client()
-        for i in range(LAST_SLOT_NO + 1):
+       
+        slot_list=self.firestore_db.collection(self.AREA_ID).get()
+
+        n=len(slot_list)
+
+        for i in range(n-1):
             self.slot_list.append(i)
 
 
@@ -66,16 +69,38 @@ class Cloud:
 
 
     def setSlotStatus(self, SLOT_NO, SLOT_STATUS):
-        slot = self.firestore_db.collection('car').document(str(SLOT_NO))
+        slot = self.firestore_db.collection(self.AREA_ID).document(str(SLOT_NO))
         slot.set({
             'ASSIGNED': True,
             'EMPTY': SLOT_STATUS
         })
+    
+    def createArea(self,AREA_ID,SLOT_NO,AREA_COORDINATES):
+        self.deleteArea(str(AREA_ID))
+        for i in range(1,SLOT_NO+1):
+            slot = self.firestore_db.collection(str(AREA_ID)).document(str(i))
+            slot.set({
+                'ASSIGNED': False,
+                'EMPTY': True,
+                'REG_NO': '',
+                'TIME_IN': firestore.firestore.SERVER_TIMESTAMP,
+                'TIME_OUT': -1
+                #,'LOCATION': firestore.firestore.GeoPoint(74, 15),
+            })
+        
+        location_param=self.firestore_db.collection(str(AREA_ID)).document('GeneralLocation')
+        location_param.set({
+            'AreaLocation':firestore.firestore.GeoPoint(AREA_COORDINATES[0],AREA_COORDINATES[1])
+        })
+
+    def deleteArea(self,AREA_ID):
+        area=self.firestore_db.collection(str(AREA_ID)).stream()
+        areaData=self.firestore_db.collection(str(AREA_ID)).get()
+        if len(areaData):
+            for i in area:
+                i.reference.delete()
 
 
-c=Cloud('smartparkingsystem-5ffb7-2f4717e68ead.json',1,4,[10,10])
-
-
-for i in range(1,5):
-    c.clearSlot(i)
-c.setGeneralLocation()
+#c=Cloud('smartparkingsystem-5ffb7-2f4717e68ead.json',[12,10])
+#c.createArea(4,1,[10,5])
+    
