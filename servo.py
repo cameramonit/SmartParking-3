@@ -20,4 +20,4 @@ sleep(0.1)
 print("And back to middle")
 servo.mid()
 sleep(0.1)
-servo.value = None;
+servo.value = None
