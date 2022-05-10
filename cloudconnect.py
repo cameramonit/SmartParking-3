@@ -1,3 +1,4 @@
+from reprlib import aRepr
 import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
@@ -6,7 +7,7 @@ import os
 
 class Cloud:
     slot_list = []
-    AREA_ID='car'
+    AREA_ID='1'
     PATH_TO_CREDENTIALS = '/smartparkingsystem-5ffb7-2f4717e68ead.json'
     FIRST_SLOT_NO = 1
     LAST_SLOT_NO = 4
@@ -14,26 +15,36 @@ class Cloud:
     LOCATION_COORDINATES = firestore.firestore.GeoPoint(12, 12)
 
 
-    def __init__(self, CREDENTIALS_FILE_NAME, AREA_COORDINATES):
+    def __init__(self, CREDENTIALS_FILE_NAME,AREA_ID=None,AREA_COORDINATES=None):
         self.PATH_TO_CREDENTIALS = os.getcwd() +'/'+ CREDENTIALS_FILE_NAME
-        self.AREA_COORDINATES = firestore.firestore.GeoPoint(AREA_COORDINATES[0],AREA_COORDINATES[1])
+
+        if(AREA_COORDINATES!=None):
+            self.AREA_COORDINATES = firestore.firestore.GeoPoint(AREA_COORDINATES[0],AREA_COORDINATES[1])
+
         cred = credentials.Certificate(self.PATH_TO_CREDENTIALS)
         firebase_admin.initialize_app(cred)
         self.firestore_db = firestore.client()
-       
+
+        if AREA_ID!=None:
+            self.AREA_ID=AREA_ID
+
         slot_list=self.firestore_db.collection(self.AREA_ID).get()
 
         n=len(slot_list)
 
         for i in range(n-1):
             self.slot_list.append(i)
-
+ 
 
     def setGeneralLocation(self):
         area=self.firestore_db.collection(self.AREA_ID).document('GeneralLocation')
         area.set({
             'AreaLocation':self.AREA_COORDINATES
         })
+    
+    def setAreaId(self,AREA_ID,AREA_COORDINATES):
+        self.AREA_ID=AREA_ID
+        self.AREA_COORDINATES=AREA_COORDINATES
 
 
     def clearSlot(self, SLOT_NO):

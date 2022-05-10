@@ -45,7 +45,7 @@ if __name__ == '__main__':
     cam=Camera(FileName)
 
     #Initialize Cloud
-    cloudfirestore=Cloud('smartparkingsystem-5ffb7-2f4717e68ead.json')
+    cloudfirestore=Cloud('smartparkingsystem-5ffb7-2f4717e68ead.json',)
 
     #Car detecting infinite loop 
     while(True):
