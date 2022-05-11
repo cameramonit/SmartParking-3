@@ -1,4 +1,3 @@
-from reprlib import aRepr
 import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
@@ -66,8 +65,8 @@ class Cloud:
                 return slot
         return -1
 
-
-    def setSlot(self, FREE_SLOT, REG_NO):
+    
+    def assignSlot(self, FREE_SLOT, REG_NO):
         slot = self.firestore_db.collection(self.AREA_ID).document(str(FREE_SLOT))
         slot.set({
             'ASSIGNED': True,
@@ -77,14 +76,23 @@ class Cloud:
             'TIME_OUT': -1
             #,'LOCATION': self.LOCATION_COORDINATES,
         })
+    
+    def searchRegistrationNumber(self,REG_NO):
+        slots=self.firestore_db.collection(self.AREA_ID)
+        slots=slots.where('REG_NO','==',REG_NO)
+        print(slots)
+        
+
+    def getSlotStatus(self,SLOT_NO):
+        return self.firestore_db.collection(self.AREA_ID).document(str(SLOT_NO)).get().to_dict()
 
 
     def setSlotStatus(self, SLOT_NO, SLOT_STATUS):
         slot = self.firestore_db.collection(self.AREA_ID).document(str(SLOT_NO))
-        slot.set({
-            'ASSIGNED': True,
+        slot.update({
             'EMPTY': SLOT_STATUS
         })
+    
     
     def createArea(self,AREA_ID,SLOT_NO,AREA_COORDINATES):
         self.deleteArea(str(AREA_ID))
@@ -112,6 +120,5 @@ class Cloud:
                 i.reference.delete()
 
 
-#c=Cloud('smartparkingsystem-5ffb7-2f4717e68ead.json',[12,10])
-#c.createArea(4,1,[10,5])
+
     

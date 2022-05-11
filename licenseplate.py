@@ -20,5 +20,5 @@ class LicensePlate:
             return None
         return response.json()
 
-# f=LicensePlate('notcar.jpg')
+# f=LicensePlate('testimage.jpg')
 # print(f.getLicensePlateNumber())
