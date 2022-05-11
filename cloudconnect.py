@@ -1,7 +1,13 @@
+import time
+import datetime
 import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
+import pytz
 import os
+from parkingprice import calculate_parking_price
+
+IST = pytz.timezone('Asia/Kolkata')
 
 
 class Cloud:
@@ -52,7 +58,7 @@ class Cloud:
             'ASSIGNED': False,
             'EMPTY': True,
             'REG_NO': '',
-            'TIME_IN': firestore.firestore.SERVER_TIMESTAMP,
+            'TIME_IN': -1,
             'TIME_OUT': -1
             #,'LOCATION': firestore.firestore.GeoPoint(74, 15),
         })
@@ -72,7 +78,7 @@ class Cloud:
             'ASSIGNED': True,
             'EMPTY': True,
             'REG_NO': REG_NO,
-            'TIME_IN': firestore.firestore.SERVER_TIMESTAMP,
+            'TIME_IN': datetime.datetime.now(IST),
             'TIME_OUT': -1
             #,'LOCATION': self.LOCATION_COORDINATES,
         })
@@ -80,7 +86,11 @@ class Cloud:
     def searchRegistrationNumber(self,REG_NO):
         slots=self.firestore_db.collection(self.AREA_ID)
         slots=slots.where('REG_NO','==',REG_NO)
-        print(slots)
+        slot=slots.get()
+        if(len(slot)==0):
+            return None
+        slot_data=(slot[0].to_dict())
+        return [slot[0].id,slot_data['TIME_IN']]
         
 
     def getSlotStatus(self,SLOT_NO):
@@ -102,7 +112,7 @@ class Cloud:
                 'ASSIGNED': False,
                 'EMPTY': True,
                 'REG_NO': '',
-                'TIME_IN': firestore.firestore.SERVER_TIMESTAMP,
+                'TIME_IN': -1,
                 'TIME_OUT': -1
                 #,'LOCATION': firestore.firestore.GeoPoint(74, 15),
             })
@@ -119,6 +129,8 @@ class Cloud:
             for i in area:
                 i.reference.delete()
 
-
-
-    
+c=Cloud('smartparkingsystem-5ffb7-2f4717e68ead.json',AREA_ID='1',AREA_COORDINATES=[10,12])
+# #c.assignSlot(1,'KA')
+entry=(c.searchRegistrationNumber('KA')[1])
+exit=datetime.datetime.now(IST)
+print(str(exit-entry).split(' days, '))
