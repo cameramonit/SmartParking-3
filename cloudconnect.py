@@ -9,11 +9,10 @@ from parkingprice import calculate_parking_price
 
 IST = pytz.timezone('Asia/Kolkata')
 
-
 class Cloud:
     slot_list = []
     AREA_ID='1'
-    PATH_TO_CREDENTIALS = '/smartparkingsystem-5ffb7-2f4717e68ead.json'
+    PATH_TO_CREDENTIALS = 'smartparkingsystem-5ffb7-2f4717e68ead.json'
     FIRST_SLOT_NO = 1
     LAST_SLOT_NO = 4
     firestore_db = 1
@@ -129,8 +128,8 @@ class Cloud:
             for i in area:
                 i.reference.delete()
 
-c=Cloud('smartparkingsystem-5ffb7-2f4717e68ead.json',AREA_ID='1',AREA_COORDINATES=[10,12])
-# #c.assignSlot(1,'KA')
-entry=(c.searchRegistrationNumber('KA')[1])
-exit=datetime.datetime.now(IST)
-print(str(exit-entry).split(' days, '))
+# c=Cloud('smartparkingsystem-5ffb7-2f4717e68ead.json',AREA_ID='1',AREA_COORDINATES=[10,12])
+# # #c.assignSlot(1,'KA')
+# entry=(c.searchRegistrationNumber('KA')[1])
+# exit=datetime.datetime.now(IST)
+# print(str(exit-entry).split(' days, '))

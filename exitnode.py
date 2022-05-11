@@ -134,12 +134,13 @@ if __name__ == '__main__':
             price = calculate_parking_price(days, hours, minutes)
 
         print(price)
+        servo.max()
         exit_barricade_distance=0
         while(exit_barricade_distance<=THRESHOLD_DISTANCE):
             exit_barricade_distance = exitUltrasonicSensor.getDistance()
             time.sleep(2)
 
         # Open the EXIT BARRICADE
-        servo.max()
+        servo.min()
         time.sleep(2)
     #####################################################
