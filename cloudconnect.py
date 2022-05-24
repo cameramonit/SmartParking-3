@@ -32,17 +32,16 @@ class Cloud:
         if AREA_ID!=None:
             self.AREA_ID=AREA_ID
 
-        slot_list=self.firestore_db.collection('SmartParkingSystem').document('Realtime').collection(self.AREA_ID).get()
+        slot_list=self.firestore_db.collection(self.AREA_ID).get()
 
         n=len(slot_list)
-        print(n)
 
         for i in range(n-1):
             self.slot_list.append(i)
  
 
     def setGeneralLocation(self):
-        area=self.firestore_db.collection('SmartParkingSystem').document('Realtime').collection(self.AREA_ID).document('GeneralLocation')
+        area=self.firestore_db.collection(self.AREA_ID).document('GeneralLocation')
         area.set({
             'AreaLocation':self.AREA_COORDINATES
         })
@@ -53,7 +52,7 @@ class Cloud:
 
 
     def clearSlot(self, SLOT_NO):
-        slot = self.firestore_db.collection('SmartParkingSystem').document('Realtime').collection(self.AREA_ID).document(str(SLOT_NO))
+        slot = self.firestore_db.collection(self.AREA_ID).document(str(SLOT_NO))
         slot.set({
             'ASSIGNED': False,
             'EMPTY': True,
@@ -66,14 +65,14 @@ class Cloud:
 
     def getFreeSlot(self):
         for slot in self.slot_list:
-            slot_info = self.firestore_db.collection('SmartParkingSystem').document('Realtime').collection(self.AREA_ID).document(str(slot)).get().to_dict()
+            slot_info = self.firestore_db.collection(self.AREA_ID).document(str(slot)).get().to_dict()
             if not slot_info['ASSIGNED']:
                 return slot
         return -1
 
     
     def assignSlot(self, FREE_SLOT, REG_NO):
-        slot = self.firestore_db.collection('SmartParkingSystem').document('Realtime').collection(self.AREA_ID).document(str(FREE_SLOT))
+        slot = self.firestore_db.collection(self.AREA_ID).document(str(FREE_SLOT))
         slot.set({
             'ASSIGNED': True,
             'EMPTY': True,
@@ -94,11 +93,11 @@ class Cloud:
         
 
     def getSlotStatus(self,SLOT_NO):
-        return self.firestore_db.collection('SmartParkingSystem').document('Realtime').collection(self.AREA_ID).document(str(SLOT_NO)).get().to_dict()
+        return self.firestore_db.collection(self.AREA_ID).document(str(SLOT_NO)).get().to_dict()
 
 
     def setSlotStatus(self, SLOT_NO, SLOT_STATUS):
-        slot = self.firestore_db.collection('SmartParkingSystem').document('Realtime').collection(self.AREA_ID).document(str(SLOT_NO))
+        slot = self.firestore_db.collection(self.AREA_ID).document(str(SLOT_NO))
         slot.update({
             'EMPTY': SLOT_STATUS
         })
@@ -107,7 +106,7 @@ class Cloud:
     def createArea(self,AREA_ID,SLOT_NO,AREA_COORDINATES):
         self.deleteArea(str(AREA_ID))
         for i in range(1,SLOT_NO+1):
-            slot = self.firestore_db.collection('SmartParkingSystem').document('Realtime').collection(str(AREA_ID)).document(str(i))
+            slot = self.firestore_db.collection(str(AREA_ID)).document(str(i))
             slot.set({
                 'ASSIGNED': False,
                 'EMPTY': True,
@@ -117,14 +116,14 @@ class Cloud:
                 #,'LOCATION': firestore.firestore.GeoPoint(74, 15),
             })
         
-        location_param=self.firestore_db.collection('SmartParkingSystem').document('Realtime').collection(str(AREA_ID)).document('GeneralLocation')
+        location_param=self.firestore_db.collection(str(AREA_ID)).document('GeneralLocation')
         location_param.set({
             'AreaLocation':firestore.firestore.GeoPoint(AREA_COORDINATES[0],AREA_COORDINATES[1])
         })
 
     def deleteArea(self,AREA_ID):
-        area=self.firestore_db.collection('SmartParkingSystem').document('Realtime').collection(str(AREA_ID)).stream()
-        areaData=self.firestore_db.collection('SmartParkingSystem').document('Realtime').collection(str(AREA_ID)).get()
+        area=self.firestore_db.collection(str(AREA_ID)).stream()
+        areaData=self.firestore_db.collection(str(AREA_ID)).get()
         if len(areaData):
             for i in area:
                 i.reference.delete()
