@@ -133,3 +133,5 @@ class Cloud:
 # entry=(c.searchRegistrationNumber('KA')[1])
 # exit=datetime.datetime.now(IST)
 # print(str(exit-entry).split(' days, '))
+
+#Flutter doesnt support reading the subcollections as of now
