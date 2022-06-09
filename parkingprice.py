@@ -1,13 +1,11 @@
 import os
 def calculate_parking_price(days,hours,minutes):
-
     price = 0
-
-    price = days*250 + hours*10
+    price = days*2500 + hours*100
     if(minutes<30):
-        price += 5
+        price += 50
     else:
-        price += 7
+        price += 70
     
     return price
 
