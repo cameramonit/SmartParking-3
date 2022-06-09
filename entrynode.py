@@ -42,6 +42,7 @@ SERVO_PIN = 22
 TRIGGER_PIN1 = 4
 ECHO_PIN1 = 27
 
+ser=False
 
 if __name__ == '__main__':    
     GPIO.setmode(GPIO.BCM)
@@ -56,10 +57,11 @@ if __name__ == '__main__':
     #Initialize Cloud
     cloudfirestore=Cloud('smartparkingsystem-5ffb7-2f4717e68ead.json',AREA_ID,AREA_COORDINATES)
     ###################################################################################
-    #Initialize Servo 
-    factory = PiGPIOFactory()
-    servo = Servo(SERVO_PIN, pin_factory=factory)
-    servo.min()
+    #Initialize Servo
+    if ser:
+        factory = PiGPIOFactory()
+        servo = Servo(SERVO_PIN, pin_factory=factory)
+        servo.min()
     ###################################################################################
 
 
@@ -109,7 +111,8 @@ if __name__ == '__main__':
         #FREE PARKING SLOT AVAILABLE
         if free_slot_number!=-1:
             cloudfirestore.assignSlot(free_slot_number,registration_no)
-            servo.max()
+            if ser:
+                servo.max()
             car_dist=-1e9
 
             #WAIT TILL THE CAR ENTERS THE FRONT GATE
@@ -118,7 +121,8 @@ if __name__ == '__main__':
                 time.sleep(2)
             time.sleep(2)
             #CLOSE THE BARRICADE
-            servo.min()
+            if ser:
+                servo.min()
 
         #FREE PARKING SLOT NOT AVAILABLE
         else:

@@ -49,6 +49,7 @@ SERVO_PIN = 22
 TRIGGER_PIN1 = 4
 ECHO_PIN1 = 27
 
+ser=False
 
 if __name__ == '__main__':
     GPIO.setmode(GPIO.BCM)
@@ -65,9 +66,10 @@ if __name__ == '__main__':
         'smartparkingsystem-5ffb7-2f4717e68ead.json', AREA_ID, AREA_COORDINATES)
     ###################################################################################
     # Initialize Servo
-    factory = PiGPIOFactory()
-    servo = Servo(SERVO_PIN, pin_factory=factory)
-    servo.min()
+    if ser:        
+        factory = PiGPIOFactory()
+        servo = Servo(SERVO_PIN, pin_factory=factory)
+        servo.min()
     ###################################################################################
 
     # Car detection at EXIT GATE infinite loop
@@ -139,18 +141,28 @@ if __name__ == '__main__':
             price = calculate_parking_price(days, hours, minutes)
         print('Parking Price')
         print(price)
-        servo.max()
+            
         exit_barricade_distance=0
         paid=False
 
         cloudfirestore.setPaymentInfo(registration_no,entry_time,exit_time,price)
-
-        while(exit_barricade_distance<=THRESHOLD_DISTANCE or not paid):
+        
+        while(not paid):
             paid=cloudfirestore.isPaymentComplete()
+            time.sleep(2)
+        
+        if ser:
+            print('Open Barricade')
+            servo.max()
+            
+        print('Parking Payment Complete')
+        while(exit_barricade_distance<=THRESHOLD_DISTANCE):
+            
             exit_barricade_distance = exitUltrasonicSensor.getDistance()
             time.sleep(3)
 
         # Open the EXIT BARRICADE
-        servo.min()
+        if ser:
+            servo.min()
         time.sleep(2)
     #####################################################
