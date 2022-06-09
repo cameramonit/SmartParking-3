@@ -1,3 +1,3 @@
-SSH key to access repo
-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
+fn4KHuP7OJdlerojcmlkInPKDRzkAD1F1b1y
 cd ~/Desktop/SmartParking
+ez996Lt32h8TZYO8G4Vjl1oQ6URLiA16WvgI
