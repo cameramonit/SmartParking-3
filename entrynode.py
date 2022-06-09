@@ -104,7 +104,7 @@ if __name__ == '__main__':
         #Valid License plate number is acquired from cloud compute
         #Get the free parking slot from the Cloud database 
         free_slot_number=cloudfirestore.getFreeSlot()
-        print('Free parking slot:'+free_slot_number)
+        print(free_slot_number)
 
         #FREE PARKING SLOT AVAILABLE
         if free_slot_number!=-1:

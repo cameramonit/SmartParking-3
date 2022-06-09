@@ -14,7 +14,8 @@ class LicensePlate:
     def getLicensePlateNumber(self):
         f=open(self.FileName, 'rb')
         file = {'file':f }
-        response=requests.post('https://smartparkingsystem1.herokuapp.com/',files=file)
+        #response=requests.post('https://smartparkingsystem1.herokuapp.com/',files=file)
+        response=requests.post('https://parkingapi1.herokuapp.com/',files=file)
         f.close()
         if(response.ok==False):
             return None

@@ -16,8 +16,6 @@ class Camera:
     def capture(self):
         self.camera.capture(self.PATH_TO_IMAGE)
 
-    def __del__(self):
-        self.camera.close()
 
 #Tests
 #c=Camera('image.jpg')
