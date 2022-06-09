@@ -1,5 +1,6 @@
 import time
 import datetime
+from xmlrpc.client import DateTime
 import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
@@ -102,6 +103,19 @@ class Cloud:
             'EMPTY': SLOT_STATUS
         })
     
+    def setPaymentInfo(self,reg_no,entry_time,exit_time,cost):
+        paymentData = self.firestore_db.collection('Payment').document(str(self.AREA_ID))
+        paymentData.update({
+            'COST':cost,
+            'PAID':False,
+            'REG_NO':reg_no,
+            'ENTRYTIME':entry_time,
+            'EXITTIME':exit_time,
+        })
+
+    def isPaymentComplete(self):
+        paymentData = self.firestore_db.collection('Payment').document(str(self.AREA_ID)).get().to_dict()
+        return paymentData['PAID']
     
     def createArea(self,AREA_ID,SLOT_NO,AREA_COORDINATES):
         self.deleteArea(str(AREA_ID))
@@ -130,6 +144,8 @@ class Cloud:
 
 #Tests
 #c=Cloud('smartparkingsystem-5ffb7-2f4717e68ead.json',AREA_ID='1',AREA_COORDINATES=[10,12])
+#print(c.isPaymentComplete())
+#c.setPaymentInfo('KA24J255',datetime.datetime.now(IST),datetime.datetime.now(IST),988)
 #c.assignSlot(1,'KA')
 # entry=(c.searchRegistrationNumber('KA')[1])
 # exit=datetime.datetime.now(IST)

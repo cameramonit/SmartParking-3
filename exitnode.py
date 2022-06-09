@@ -141,9 +141,14 @@ if __name__ == '__main__':
         print(price)
         servo.max()
         exit_barricade_distance=0
-        while(exit_barricade_distance<=THRESHOLD_DISTANCE):
+        paid=False
+
+        cloudfirestore.setPaymentInfo(registration_no,entry_time,exit_time,price)
+
+        while(exit_barricade_distance<=THRESHOLD_DISTANCE or not paid):
+            paid=cloudfirestore.isPaymentComplete()
             exit_barricade_distance = exitUltrasonicSensor.getDistance()
-            time.sleep(2)
+            time.sleep(3)
 
         # Open the EXIT BARRICADE
         servo.min()
