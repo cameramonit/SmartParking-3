@@ -24,21 +24,58 @@ def ultrasonicTest():
     print('Distance'+dis)
     
 def ledTest():
-    pass
+    print('Enter Led Pin Number')
+    pin=int(input())
+    led=Led(pin)
+    led.turnOn()
+    time.sleep(5)
+    led.turnOff()
+    
 def servoTest():
-    pass
+    print('Enter Servo Pin Number')
+    pin=int(input())
+    factory = PiGPIOFactory()
+    servo = Servo(pin, pin_factory=factory)
+    servo=Servo(4)
+    print("Start in the middle")
+    servo.mid()
+    sleep(1)
+    print("Go to min")
+    servo.min()
+    sleep(1)
+    print("Go to max")
+    servo.max()
+    sleep(1)
+    print("And back to middle")
+    servo.mid()
+    sleep(0.1)
+    servo.value = None
 def buzzerTest():
-    pass
+    print('Enter Buzzer Pin number')
+    pin=int(input())
+    b=Buzzer(4)
+    b.makeSound()
+    time.sleep(1)
+    b.stopSound()
+    
 def parkingPriceTest():
-    pass
+    p=calculate_parking_price(1,2,3)
+    print(p)
+    
 def licensePlateTest():
-    pass
+    print('Enter image file name')
+    fname=input()
+    l=LicensePlate(fname)
+    print(l.getLicensePlateNumber())
+
 def cloudConnectTest():
-    pass
+    c=Cloud('smartparkingsystem-5ffb7-2f4717e68ead.json',AREA_ID='1',AREA_COORDINATES=[10,12])
+    c.assignSlot(1,'KA')
 
 if __name__ == '__main__':    
     GPIO.setmode(GPIO.BCM)
     while(True):
+        time.sleep(3)
         os.system('clear')
         choice=0
         print('Enter the component to test')
@@ -70,42 +107,42 @@ if __name__ == '__main__':
             print('TestPassed')
         elif(choice==3):
             try:
-                
+                ledTest()
             except:
                 print('TestFailed')
                 continue;
             print('TestPassed')
         elif(choice==4):
             try:
-                
+                servoTest()
             except:
                 print('TestFailed')
                 continue;
             print('TestPassed')
         elif(choice==5):
             try:
-                
+                buzzerTest()
             except:
                 print('TestFailed')
                 continue;
             print('TestPassed')
         elif(choice==6):
             try:
-                
+                parkingPriceTest()
             except:
                 print('TestFailed')
                 continue;
             print('TestPassed')
         elif(choice==7):
             try:
-                
+                licensePlateTest()
             except:
                 print('TestFailed')
                 continue;
             print('TestPassed')
         elif(choice==8):
             try:
-                
+                cloudTest()
             except:
                 print('TestFailed')
                 continue;
