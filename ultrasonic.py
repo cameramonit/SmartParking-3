@@ -37,3 +37,9 @@ class Ultrasonic:
         # and divide by 2, because there and back
         distance = (TimeElapsed * 34300) / 2
         return distance
+    
+#Tests
+#GPIO.setmode(GPIO.BCM)
+#us=Ultrasonic(4,27)
+#dis=us.getDistance()
+#print(dis)

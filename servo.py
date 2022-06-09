@@ -4,19 +4,21 @@ from time import sleep
 
 from gpiozero.pins.pigpio import PiGPIOFactory
 
+
+#Tests
 factory = PiGPIOFactory()
 
-servo = Servo(26, pin_factory=factory)
-
+servo = Servo(4, pin_factory=factory)
+servo=Servo(4)
 print("Start in the middle")
 servo.mid()
-sleep(0.1)
+sleep(1)
 print("Go to min")
 servo.min()
-sleep(0.1)
+sleep(1)
 print("Go to max")
 servo.max()
-sleep(0.1)
+sleep(1)
 print("And back to middle")
 servo.mid()
 sleep(0.1)

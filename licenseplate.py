@@ -19,6 +19,6 @@ class LicensePlate:
         if(response.ok==False):
             return None
         return response.json()
-
-# f=LicensePlate('testimage.jpg')
-# print(f.getLicensePlateNumber())
+#Tests
+#l=LicensePlate('download.jpg')
+#print(l.getLicensePlateNumber())

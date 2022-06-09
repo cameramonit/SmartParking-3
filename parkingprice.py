@@ -11,3 +11,6 @@ def calculate_parking_price(days,hours,minutes):
     
     return price
 
+#Tests
+#p=calculate_parking_price(1,2,3)
+#print(p)

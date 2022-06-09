@@ -128,8 +128,9 @@ class Cloud:
             for i in area:
                 i.reference.delete()
 
-# c=Cloud('smartparkingsystem-5ffb7-2f4717e68ead.json',AREA_ID='1',AREA_COORDINATES=[10,12])
-# # #c.assignSlot(1,'KA')
+#Tests
+#c=Cloud('smartparkingsystem-5ffb7-2f4717e68ead.json',AREA_ID='1',AREA_COORDINATES=[10,12])
+#c.assignSlot(1,'KA')
 # entry=(c.searchRegistrationNumber('KA')[1])
 # exit=datetime.datetime.now(IST)
 # print(str(exit-entry).split(' days, '))
