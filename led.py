@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-
+import time
 
 class Led:
     LED_PIN = 2
@@ -13,3 +13,11 @@ class Led:
 
     def turnOff(self):
         GPIO.output(self.BUZZER_PIN, False)
+
+
+#Tests
+#GPIO.setmode(GPIO.BCM)
+#led=Led(4)
+#led.turnOn()
+#time.sleep(9)
+#led.turnOff()
