@@ -9,9 +9,20 @@ from licenseplate import LicensePlate
 from buzzer import Buzzer
 
 def cameraTest():
-    pass
+    c=Camera('image.jpg')
+    c.capture()
+    
 def ultrasonicTest():
-    pass
+    print('Enter Trigger Pin Number')
+    t=int(input())
+    print('Enter Echo Pin Number')
+    e=int(input())
+    us=Ultrasonic(t,e)
+    dis=us.getDistance()
+    if(dis==-1):
+        raise Exception('Ultrasonic Connection Loose')
+    print('Distance'+dis)
+    
 def ledTest():
     pass
 def servoTest():
@@ -28,6 +39,7 @@ def cloudConnectTest():
 if __name__ == '__main__':    
     GPIO.setmode(GPIO.BCM)
     while(True):
+        os.system('clear')
         choice=0
         print('Enter the component to test')
         print('1: Camera 2: Ultrasonic')
@@ -43,20 +55,60 @@ if __name__ == '__main__':
             os.system('clear')
             continue;
         if(choice==1):
-            pass
+            try:
+                cameraTest()
+            except:
+                print('TestFailed')
+                continue;
+            print('TestPassed')
         elif(choice==2):
-            pass
+            try:
+                ultrasonicTest()
+            except:
+                print('TestFailed')
+                continue;
+            print('TestPassed')
         elif(choice==3):
-            pass
+            try:
+                
+            except:
+                print('TestFailed')
+                continue;
+            print('TestPassed')
         elif(choice==4):
-            pass
+            try:
+                
+            except:
+                print('TestFailed')
+                continue;
+            print('TestPassed')
         elif(choice==5):
-            pass
+            try:
+                
+            except:
+                print('TestFailed')
+                continue;
+            print('TestPassed')
         elif(choice==6):
-            pass
+            try:
+                
+            except:
+                print('TestFailed')
+                continue;
+            print('TestPassed')
         elif(choice==7):
-            pass
+            try:
+                
+            except:
+                print('TestFailed')
+                continue;
+            print('TestPassed')
         elif(choice==8):
-            pass
+            try:
+                
+            except:
+                print('TestFailed')
+                continue;
+            print('TestPassed')
         elif(choice==9):
             exit()
