@@ -13,7 +13,7 @@ from buzzer import Buzzer
 # Entry Node is the node with the camera at the ENTRY GATE OF THE PARKING AREA
 
 # MINIMUM DISTANCE FOR THE ULTRASONIC SENSOR TO DETECT THE VEHICLE
-THRESHOLD_DISTANCE=40
+THRESHOLD_DISTANCE=20
 # WAIT TIME FOR THE SENSOR TO WAIT FOR THE OBJECT TO NOT MOVE 
 WAIT_TIME=3
 # REPEAT CHECK IF THE DISTANCE OF THE OBJECT REMAINS THE SAME FOR SOME NUMBER OF TIMES
@@ -35,12 +35,12 @@ BUZZER_PIN2 = 1
 BUZZER_PIN3 = 1
 
 #SERVO PIN
-SERVO_PIN = 26
+SERVO_PIN = 22
 
 
 #ULTRASONIC SENSOR PINS
-TRIGGER_PIN1 = 1
-ECHO_PIN1 = 2
+TRIGGER_PIN1 = 4
+ECHO_PIN1 = 27
 
 
 if __name__ == '__main__':    
@@ -57,9 +57,9 @@ if __name__ == '__main__':
     cloudfirestore=Cloud('smartparkingsystem-5ffb7-2f4717e68ead.json',AREA_ID,AREA_COORDINATES)
     ###################################################################################
     #Initialize Servo 
-    factory = PiGPIOFactory()
-    servo = Servo(SERVO_PIN, pin_factory=factory)
-    servo.min()
+    #factory = PiGPIOFactory()
+    #servo = Servo(SERVO_PIN, pin_factory=factory)
+    #servo.min()
     ###################################################################################
 
 
@@ -67,7 +67,12 @@ if __name__ == '__main__':
     while(True):
         # get Distance of car from entry parking booth
         car_distance=entryUltrasonicSensor.getDistance()
+        print(car_distance)
         time.sleep(WAIT_TIME)
+        if(car_distance==-1):
+            print('Ultrasonic Error')
+            time.sleep(2)
+            continue
         ##########################################
         #Object Detect Flag
         flag=0
@@ -75,6 +80,7 @@ if __name__ == '__main__':
         #Check if object is a waiting car
         for i in range(1,REPEAT_DISTANCE_CHECKS):
             car_distance=entryUltrasonicSensor.getDistance()
+            print(car_distance)
             time.sleep(1)
             if(car_distance>THRESHOLD_DISTANCE):
                 flag=1
@@ -89,6 +95,7 @@ if __name__ == '__main__':
         cam.capture()
         lp=LicensePlate(FileName)
         registration_no=lp.getLicensePlateNumber()
+        print(registration_no)
 
         if(registration_no==None):
             #OPTION-> ADD BUZZER TO SEND THE STRAY OBJECT AWAY FROM PARKING AREA
@@ -97,11 +104,12 @@ if __name__ == '__main__':
         #Valid License plate number is acquired from cloud compute
         #Get the free parking slot from the Cloud database 
         free_slot_number=cloudfirestore.getFreeSlot()
+        print('Free parking slot:'+free_slot_number)
 
         #FREE PARKING SLOT AVAILABLE
         if free_slot_number!=-1:
             cloudfirestore.assignSlot(free_slot_number,registration_no)
-            servo.max()
+            #servo.max()
             car_dist=-1e9
 
             #WAIT TILL THE CAR ENTERS THE FRONT GATE
@@ -110,7 +118,7 @@ if __name__ == '__main__':
                 time.sleep(2)
             time.sleep(2)
             #CLOSE THE BARRICADE
-            servo.min()
+            #servo.min()
 
         #FREE PARKING SLOT NOT AVAILABLE
         else:

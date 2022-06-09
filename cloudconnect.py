@@ -36,7 +36,7 @@ class Cloud:
 
         n=len(slot_list)
 
-        for i in range(n-1):
+        for i in range(1,n):
             self.slot_list.append(i)
  
 
