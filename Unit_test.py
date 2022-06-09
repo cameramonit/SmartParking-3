@@ -4,6 +4,7 @@ import os
 from cloudconnect import Cloud
 from ultrasonic import Ultrasonic
 from led import Led
+from parkingprice import calculate_parking_price
 from camera import Camera
 from licenseplate import LicensePlate
 from buzzer import Buzzer
@@ -19,9 +20,10 @@ def ultrasonicTest():
     e=int(input())
     us=Ultrasonic(t,e)
     dis=us.getDistance()
+    print(dis)
     if(dis==-1):
-        raise Exception('Ultrasonic Connection Loose')
-    print('Distance'+dis)
+        return -1
+    print('Distance: '+str(dis))
     
 def ledTest():
     print('Enter Led Pin Number')
@@ -50,6 +52,7 @@ def servoTest():
     servo.mid()
     sleep(0.1)
     servo.value = None
+    
 def buzzerTest():
     print('Enter Buzzer Pin number')
     pin=int(input())
@@ -74,16 +77,18 @@ def cloudConnectTest():
 
 if __name__ == '__main__':    
     GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
     while(True):
         time.sleep(3)
         os.system('clear')
         choice=0
-        print('Enter the component to test')
+        print('Enter the component number to test')
         print('1: Camera 2: Ultrasonic')
         print('3: Led 4: Servo')
         print('5: Buzzer 6: ParkingPrice')
         print('7: LicensePlate 8: Cloud')
         print('9: ExitTest')
+        print('----------------------------------------')
         try:
             choice=int(input())
         except:
@@ -100,7 +105,9 @@ if __name__ == '__main__':
             print('TestPassed')
         elif(choice==2):
             try:
-                ultrasonicTest()
+                dis=ultrasonicTest()
+                if(dis==-1):
+                    print('TestFailed')
             except:
                 print('TestFailed')
                 continue;
@@ -142,7 +149,7 @@ if __name__ == '__main__':
             print('TestPassed')
         elif(choice==8):
             try:
-                cloudTest()
+                cloudConnectTest()
             except:
                 print('TestFailed')
                 continue;

@@ -41,7 +41,7 @@ class Ultrasonic:
         return distance
     
 #Tests
-GPIO.setmode(GPIO.BCM)
-us=Ultrasonic(4,27)
-dis=us.getDistance()
-print(dis)
+#GPIO.setmode(GPIO.BCM)
+#us=Ultrasonic(4,27)
+#dis=us.getDistance()
+#print(dis)
