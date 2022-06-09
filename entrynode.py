@@ -13,7 +13,7 @@ from buzzer import Buzzer
 # Entry Node is the node with the camera at the ENTRY GATE OF THE PARKING AREA
 
 # MINIMUM DISTANCE FOR THE ULTRASONIC SENSOR TO DETECT THE VEHICLE
-THRESHOLD_DISTANCE=20
+THRESHOLD_DISTANCE=10
 # WAIT TIME FOR THE SENSOR TO WAIT FOR THE OBJECT TO NOT MOVE 
 WAIT_TIME=3
 # REPEAT CHECK IF THE DISTANCE OF THE OBJECT REMAINS THE SAME FOR SOME NUMBER OF TIMES
@@ -57,9 +57,9 @@ if __name__ == '__main__':
     cloudfirestore=Cloud('smartparkingsystem-5ffb7-2f4717e68ead.json',AREA_ID,AREA_COORDINATES)
     ###################################################################################
     #Initialize Servo 
-    #factory = PiGPIOFactory()
-    #servo = Servo(SERVO_PIN, pin_factory=factory)
-    #servo.min()
+    factory = PiGPIOFactory()
+    servo = Servo(SERVO_PIN, pin_factory=factory)
+    servo.min()
     ###################################################################################
 
 
@@ -109,7 +109,7 @@ if __name__ == '__main__':
         #FREE PARKING SLOT AVAILABLE
         if free_slot_number!=-1:
             cloudfirestore.assignSlot(free_slot_number,registration_no)
-            #servo.max()
+            servo.max()
             car_dist=-1e9
 
             #WAIT TILL THE CAR ENTERS THE FRONT GATE
@@ -118,7 +118,7 @@ if __name__ == '__main__':
                 time.sleep(2)
             time.sleep(2)
             #CLOSE THE BARRICADE
-            #servo.min()
+            servo.min()
 
         #FREE PARKING SLOT NOT AVAILABLE
         else:

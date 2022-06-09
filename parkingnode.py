@@ -27,8 +27,8 @@ BUZZER_PIN2 = 1
 BUZZER_PIN3 = 1
 
 #FIRST ULTRASONIC SENSOR
-TRIGGER_PIN1 = 1
-ECHO_PIN1 = 1
+TRIGGER_PIN1 = 4
+ECHO_PIN1 = 27
 #SECOND ULTRASONIC SENSOR
 TRIGGER_PIN2 = 1
 ECHO_PIN2 = 1
@@ -47,24 +47,28 @@ if __name__ == '__main__':
     ################################################################################
     ultrasonicArray=[]
     ultrasonicArray.append(Ultrasonic(TRIGGER_PIN1,ECHO_PIN1))
-    ultrasonicArray.append(Ultrasonic(TRIGGER_PIN2,ECHO_PIN2))
-    ultrasonicArray.append(Ultrasonic(TRIGGER_PIN3,ECHO_PIN3))
+#     ultrasonicArray.append(Ultrasonic(TRIGGER_PIN2,ECHO_PIN2))
+#     ultrasonicArray.append(Ultrasonic(TRIGGER_PIN3,ECHO_PIN3))
 
-    cnt=0
+    
+    while(True):
+        cnt=0    
+        for i in ultrasonicArray:
+            cnt+=1
 
-    for i in ultrasonicArray:
-        cnt+=1
+            #GET THE VEHICLE DISTANCE FROM THE SLOT
+            dist=i.getDistance()
+            print('SlotNumber :'+str(cnt))
+            print('Distance: '+str(dist))
+            slotStaus:bool
+            #CHECK IF THE VEHICLES ARE IN THE PARKING SLOTS
 
-        #GET THE VEHICLE DISTANCE FROM THE SLOT
-        dist=i.getDistance()
+            #if object is present
+            if(dist<THRESHOLD_DISTANCE):
+                slotStaus=False
+            else:
+                slotStaus=True
 
-        slotStaus:bool
-        #CHECK IF THE VEHICLES ARE IN THE PARKING SLOTS
-
-        #if object is present
-        if(dist<THRESHOLD_DISTANCE):
-            slotStaus=False
-        else:
-            slotStaus=True
-
-        cloudfirestore.setSlotStatus(cnt,slotStaus)
+            cloudfirestore.setSlotStatus(cnt,slotStaus)
+            time.sleep(0.5)
+        

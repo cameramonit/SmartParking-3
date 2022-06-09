@@ -17,7 +17,7 @@ from buzzer import Buzzer
 # Exit Node is the node with the camera at the EXIT GATE OF THE PARKING AREA
 
 # MINIMUM DISTANCE FOR THE ULTRASONIC SENSOR TO DETECT THE VEHICLE
-THRESHOLD_DISTANCE = 40
+THRESHOLD_DISTANCE = 10
 # WAIT TIME FOR THE SENSOR TO WAIT FOR THE OBJECT TO NOT MOVE
 WAIT_TIME = 3
 # REPEAT CHECK IF THE DISTANCE OF THE OBJECT REMAINS THE SAME FOR SOME NUMBER OF TIMES
@@ -75,6 +75,7 @@ if __name__ == '__main__':
         # get Distance of car from exit parking booth
         car_distance = exitUltrasonicSensor.getDistance()
         time.sleep(WAIT_TIME)
+        print(car_distance)
         ##########################################
         # Object Detect Flag
         flag = 0
@@ -82,6 +83,7 @@ if __name__ == '__main__':
         # Check if object is a waiting car
         for i in range(1, REPEAT_DISTANCE_CHECKS):
             car_distance = exitUltrasonicSensor.getDistance()
+            print(car_distance)
             time.sleep(1)
             if(car_distance > THRESHOLD_DISTANCE):
                 flag = 1
@@ -96,7 +98,7 @@ if __name__ == '__main__':
         cam.capture()
         lp = LicensePlate(FileName)
         registration_no = lp.getLicensePlateNumber()
-
+        print(registration_no)
         if(registration_no == None):
             # OPTION-> ADD BUZZER TO SEND THE STRAY OBJECT AWAY FROM PARKING AREA
             continue
@@ -106,7 +108,10 @@ if __name__ == '__main__':
 
         if(res == None):
             # CAR NUMBER PLATE DIDNT MATCH ANY CAR IN THE DATABASE
-            pass
+            print('Car Not found')
+            time.sleep(10)
+            continue
+            
         slot_no = res[0]
         entry_time = res[1]
 
@@ -115,12 +120,12 @@ if __name__ == '__main__':
 
         total_parking_time = str(total_parking_time)
         total_parking_time = total_parking_time.split(' days, ')
-
+            
         price = 0
-
+        print(total_parking_time)
         if(len(total_parking_time) == 1):
             # time in hours,mins,seconds format
-            total_parking_time = str(total_parking_time).split(':')
+            total_parking_time = str(total_parking_time[0]).split(':')    
             days = 0
             hours = int(total_parking_time[0])
             minutes = int(total_parking_time[1])
@@ -132,7 +137,7 @@ if __name__ == '__main__':
             hours = int(timex[0])
             minutes = int(timex[1])
             price = calculate_parking_price(days, hours, minutes)
-
+        print('Parking Price')
         print(price)
         servo.max()
         exit_barricade_distance=0
