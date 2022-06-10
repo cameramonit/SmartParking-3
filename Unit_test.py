@@ -8,6 +8,8 @@ from parkingprice import calculate_parking_price
 from camera import Camera
 from licenseplate import LicensePlate
 from buzzer import Buzzer
+from gpiozero.pins.pigpio import PiGPIOFactory
+from gpiozero import Servo
 
 def cameraTest():
     c=Camera('image.jpg')
@@ -36,21 +38,21 @@ def ledTest():
 def servoTest():
     print('Enter Servo Pin Number')
     pin=int(input())
+    print(pin)
     factory = PiGPIOFactory()
     servo = Servo(pin, pin_factory=factory)
-    servo=Servo(4)
     print("Start in the middle")
     servo.mid()
-    sleep(1)
+    time.sleep(1)
     print("Go to min")
     servo.min()
-    sleep(1)
+    time.sleep(1)
     print("Go to max")
     servo.max()
-    sleep(1)
+    time.sleep(1)
     print("And back to middle")
     servo.mid()
-    sleep(0.1)
+    time.sleep(0.1)
     servo.value = None
     
 def buzzerTest():
