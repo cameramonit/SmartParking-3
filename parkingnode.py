@@ -27,14 +27,14 @@ BUZZER_PIN2 = 1
 BUZZER_PIN3 = 1
 
 #FIRST ULTRASONIC SENSOR
-TRIGGER_PIN1 = 4
-ECHO_PIN1 = 27
+TRIGGER_PIN1 = 8
+ECHO_PIN1 = 25
 #SECOND ULTRASONIC SENSOR
-TRIGGER_PIN2 = 1
-ECHO_PIN2 = 1
+TRIGGER_PIN2 = 24
+ECHO_PIN2 = 23
 #THIRD ULTRASONIC SENSOR
-TRIGGER_PIN3 = 1
-ECHO_PIN3 = 1
+TRIGGER_PIN3 = 18
+ECHO_PIN3 = 15
 
 #NUMBER OF SLOTS
 FIRST_SLOT_NO = 1
@@ -47,8 +47,8 @@ if __name__ == '__main__':
     ################################################################################
     ultrasonicArray=[]
     ultrasonicArray.append(Ultrasonic(TRIGGER_PIN1,ECHO_PIN1))
-#     ultrasonicArray.append(Ultrasonic(TRIGGER_PIN2,ECHO_PIN2))
-#     ultrasonicArray.append(Ultrasonic(TRIGGER_PIN3,ECHO_PIN3))
+    ultrasonicArray.append(Ultrasonic(TRIGGER_PIN2,ECHO_PIN2))
+    ultrasonicArray.append(Ultrasonic(TRIGGER_PIN3,ECHO_PIN3))
 
     
     while(True):
