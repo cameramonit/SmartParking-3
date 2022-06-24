@@ -10,6 +10,7 @@ class LicensePlate:
         '''def __init__(self,PATH_TO_IMAGE):'''
         '''self.PATH_TO_IMAGE = PATH_TO_IMAGE'''
         self.FileName=os.getcwd()+'/'+FileName
+        print(self.FileName)
 
     def getLicensePlateNumber(self):
         f=open(self.FileName, 'rb')

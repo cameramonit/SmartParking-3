@@ -23,8 +23,9 @@ class Ultrasonic:
 
         StartTime = time.time()
         StopTime = time.time()
-
+        #print(str(StopTime)+" "+str(StartTime))
         # save StartTime
+        
         while GPIO.input(self.ECHO) == 0:
             StartTime = time.time()
             if(StartTime-StopTime>1.5):
@@ -32,6 +33,8 @@ class Ultrasonic:
         # save time of arrival
         while GPIO.input(self.ECHO) == 1:
             StopTime = time.time()
+            if(abs(StartTime-StopTime)>1.5):
+                return -1
 
         # time difference between start and arrival
         TimeElapsed = StopTime - StartTime
