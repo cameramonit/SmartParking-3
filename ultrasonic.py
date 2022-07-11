@@ -28,6 +28,7 @@ class Ultrasonic:
         
         while GPIO.input(self.ECHO) == 0:
             StartTime = time.time()
+            #print(StartTime)
             if(StartTime-StopTime>1.5):
                 return -1
         # save time of arrival
@@ -45,6 +46,6 @@ class Ultrasonic:
     
 #Tests
 #GPIO.setmode(GPIO.BCM)
-#us=Ultrasonic(4,27)
+#us=Ultrasonic(14,15)
 #dis=us.getDistance()
 #print(dis)

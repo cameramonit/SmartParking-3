@@ -10,9 +10,9 @@ from licenseplate import LicensePlate
 from buzzer import Buzzer
 from gpiozero.pins.pigpio import PiGPIOFactory
 from gpiozero import Servo
+c=Camera('image.jpg')
 
 def cameraTest():
-    c=Camera('image.jpg')
     c.capture()
     
 def ultrasonicTest():
@@ -81,7 +81,7 @@ if __name__ == '__main__':
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
     while(True):
-        time.sleep(3)
+        time.sleep(1)
         os.system('clear')
         choice=0
         print('Enter the component number to test')
@@ -95,7 +95,7 @@ if __name__ == '__main__':
             choice=int(input())
         except:
             print('Input Error')
-            time.sleep(3)
+            time.sleep(0.2)
             os.system('clear')
             continue;
         if(choice==1):
