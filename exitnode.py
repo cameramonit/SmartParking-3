@@ -109,7 +109,7 @@ if __name__ == '__main__':
 
     # Car detection at EXIT GATE infinite loop
     while(True):
-        font=ImageFont.truetype('arial.ttf',12)
+        font=ImageFont.truetype('arial.ttf',15)
         draw.rectangle((0,0,width,height), outline=0, fill=0)
         draw.text((x+5, top),       'SMART',  font=font, fill=255)
         draw.text((x+25, top+10),       'PARKING',  font=font, fill=255)
