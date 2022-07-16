@@ -19,7 +19,7 @@ from buzzer import Buzzer
 
 # Entry Node is the node with the camera at the ENTRY GATE OF THE PARKING AREA
 
-# MINIMUM DISTANCE FOR THE ULTRASONIC SENSOR TO DETECT THE VEHICLE
+# MAXIMUM DISTANCE FOR THE ULTRASONIC SENSOR TO DETECT THE VEHICLE
 THRESHOLD_DISTANCE=14
 # WAIT TIME FOR THE SENSOR TO WAIT FOR THE OBJECT TO NOT MOVE 
 WAIT_TIME=3
@@ -168,6 +168,22 @@ if __name__ == '__main__':
             disp.display()
             time.sleep(10)
             continue
+
+
+        #Check if a slot is assigned for the vehicle
+        datareg=cloudfirestore.searchRegistrationNumber(registration_no)
+        if(datareg!=None):
+            #WAIT TILL THE CAR ENTERS THE FRONT GATE
+            while(car_dist<THRESHOLD_DISTANCE):
+                car_dist=entryUltrasonicSensor.getDistance()
+                print(car_dist)
+                time.sleep(2)
+            time.sleep(2)
+            #CLOSE THE BARRICADE
+            if ser:
+                servo.mid()
+            
+
 
         #Valid License plate number is acquired from cloud compute
         #Get the free parking slot from the Cloud database 
