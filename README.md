@@ -25,20 +25,22 @@ It is a project that aims at solving everyday parking problems, by suggesting th
 * React Payment portal
   * Login Screen for payment portal for attendant
   
-  ![image](https://user-images.githubusercontent.com/65838540/230707458-8e015f8d-780c-4d56-9a84-30b46a0fc41a.png)
+  ![image](https://user-images.githubusercontent.com/65838540/230708053-14844f14-9e44-4788-beb9-d42aa8f1144e.png)
+
   
   * Splash Screen while waiting for vehicle at gate
 
-  ![image](https://user-images.githubusercontent.com/65838540/230707536-5112d07c-5d9e-4831-bc67-c47693f28f99.png)
+  ![image](https://user-images.githubusercontent.com/65838540/230708067-715e3959-769e-408d-8805-db3e2e064bcb.png)
 
 
   * Payment Screen for the vehicle at gate
   
-  ![image](https://user-images.githubusercontent.com/65838540/230707496-0b87ef8e-4524-4fa9-a1c0-f271eb0aeea7.png)
+  ![image](https://user-images.githubusercontent.com/65838540/230708081-e2e35ea7-d43d-4330-96cc-0d68988eb3c6.png)
+  
   
   * Payment Successful page
 
-   ![image](https://user-images.githubusercontent.com/65838540/230707522-76519887-2321-4876-9da0-b24fc7e664c2.png)
+   ![image](https://user-images.githubusercontent.com/65838540/230708104-8ada68e0-71c3-4138-8f1f-7ba18f2333db.png)
 
 
 
