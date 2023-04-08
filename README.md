@@ -16,7 +16,7 @@ It is a project that aims at solving everyday parking problems, by suggesting th
     
   * Main screen with navigation details to the closest parking slot
 
-  ![image](https://user-images.githubusercontent.com/65838540/230707595-ad7999fa-cd1b-4087-a6a5-ebce18df1a8d.png)
+    ![image](https://user-images.githubusercontent.com/65838540/230707595-ad7999fa-cd1b-4087-a6a5-ebce18df1a8d.png)
 
 
 
