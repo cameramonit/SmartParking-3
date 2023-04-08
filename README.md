@@ -35,7 +35,7 @@ It is a project that aims at solving everyday parking problems, by suggesting th
 
   * Payment Screen for the vehicle at gate
   
-  ![image](https://user-images.githubusercontent.com/65838540/230708081-e2e35ea7-d43d-4330-96cc-0d68988eb3c6.png)
+  ![image](https://user-images.githubusercontent.com/65838540/230708127-017b40ce-2eb8-4b67-8cdd-01c499a6fc98.png)
   
   
   * Payment Successful page
