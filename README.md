@@ -4,6 +4,8 @@ It is a project that aims at solving everyday parking problems, by suggesting th
 * Tech Stack: [Android, React, Firebase, Python, Heroku, ML, Google Maps, Raspberry Pi]
 
 * Project Report
+ [Smart Parking System (final report).pdf](https://github.com/NandaNxD/SmartParking/files/11182701/Smart.Parking.System.final.report.pdf)
+
 
 * Project Architecture 
 
